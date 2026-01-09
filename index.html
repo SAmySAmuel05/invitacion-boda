@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Invitación de Boda</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fuente elegante -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: '#D4AF37'
+          },
+          fontFamily: {
+            elegant: ['Playfair Display', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+  @keyframes fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scrollHint {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+
+.animate-scroll {
+  animation: scrollHint 2.2s ease-in-out infinite;
+}
+
+  .animate-fade {
+    animation: fade 1.5s ease forwards;
+  }
+
+  .animate-slide {
+    animation: slideUp 1.5s ease forwards;
+    animation-delay: 0.5s;
+    opacity: 0;
+  }
+
+  .animate-slide-delay {
+    animation: slideUp 1.5s ease forwards;
+    animation-delay: 1s;
+    opacity: 0;
+  }
+
+    .animate-slide-delay-2 {
+    animation: slideUp 1.5s ease forwards;
+    animation-delay: 1.5s;
+    opacity: 0;
+  }
+    .hidden-anim {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .show-anim {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 1.5s ease;
+  }
+
+  .delay-200 {
+  transition-delay: 0.2s;
+}
+
+</style>
+
+</head>
+
+<body class="bg-black text-white font-elegant overflow-x-hidden scroll-smooth">
+
+  <!-- Overlay inicial -->
+  <div id="overlay"
+  class="fixed inset-0 bg-black flex items-center justify-center z-50 transition-opacity duration-700">
+    <button id="startBtn"
+      class="border border-gold text-gold px-8 py-4 text-lg tracking-widest hover:bg-gold hover:text-black transition">
+      TOCA PARA COMENZAR
+    </button>
+  </div>
+
+  <!-- Música -->
+  <audio id="music" loop>
+    <source src="media/music/music.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Contenido principal -->
+<main
+  class="relative min-h-screen bg-cover bg-center flex flex-col justify-between px-6 py-16 sm:py-20"
+  style="background-image: url('media/images/pareja.jpeg');"
+>
+
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-black/60"></div>
+
+  <!-- CONTENIDO SUPERIOR -->
+  <div class="relative z-10 text-center pt-16 sm:pt-24 md:pt-32">
+
+    <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-gold mb-6 hidden-anim observe">
+      Josue & Samantha
+    </h1>
+
+    <p class="text-xl sm:text-2xl md:text-3xl tracking-widest mb-4 hidden-anim observe">
+      NOS VAMOS A CASAR!!!
+    </p>
+
+    <p class="text-lg sm:text-xl md:text-2xl hidden-anim observe">
+      10 de Junio de 2026
+    </p>
+
+  </div>
+
+  <!-- CONTADOR INFERIOR -->
+    <div
+        id="countdown"
+         class="relative z-10 flex justify-center gap-6 sm:gap-8 text-gold text-center hidden-anim pb-6"
+    >
+
+
+    <div>
+      <span id="days" class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold"></span>
+      <p class="text-s tracking-widest text-white">DÍAS</p>
+    </div>
+
+    <div>
+      <span id="hours" class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold"></span>
+      <p class="text-s tracking-widest text-white">HORAS</p>
+    </div>
+
+    <div>
+      <span id="minutes" class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold"></span>
+      <p class="text-s tracking-widest text-white">MIN</p>
+    </div>
+
+    <div>
+      <span id="seconds" class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold"></span>
+      <p class="text-s tracking-widest text-white">SEG</p>
+    </div>
+
+  </div>
+
+    <button
+        class="scroll-btn relative z-10 mb-4 text-white text-sm tracking-widest animate-bounce"
+        data-scroll="historia"
+    >
+    DESLIZA PARA VER MÁS ↓
+    </button>
+
+
+</main>
+
+<section
+  id="historia"
+  class="relative min-h-screen bg-cover bg-center flex items-center justify-center px-6 py-20"
+  style="background-image: url('media/images/pareja2.jpeg');"
+>
+
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-black/60 pointer-events-none"></div>
+
+  <!-- Contenido -->
+  <div class="relative z-10 max-w-3xl text-center">
+
+    <h2
+  class="text-4xl sm:text-5xl md:text-6xl text-gold mb-8 hidden-anim observe">
+  Nuestra historia
+</h2>
+
+<p
+  class="text-lg sm:text-xl leading-relaxed text-gray-200 hidden-anim observe">
+  Todo comenzó con una mirada, una conversación inesperada.
+  <br><br>
+  Hoy, después de risas, aprendizajes y amor compartido, decidimos dar
+  este paso juntos y celebrar con quienes más queremos.
+</p>
+
+</div>
+
+<button
+  class="scroll-btn absolute bottom-6 left-1/2 -translate-x-1/2 z-30
+         text-center cursor-pointer bg-transparent border-none"
+  data-scroll="biblia"
+>
+  <p class="text-sm uppercase tracking-widest text-gold mb-2">
+    Desliza para ver más
+  </p>
+
+  <div class="w-5 h-9 border-2 border-gold rounded-full mx-auto flex justify-center">
+    <span class="w-1 h-2 bg-gold rounded-full mt-2 animate-scroll"></span>
+  </div>
+</button>
+
+</div>
+</section>
+
+<section
+  id="biblia"
+  class="relative min-h-screen flex items-center justify-center text-center bg-cover bg-center px-6"
+  style="background-image: url('media/images/biblia.jpeg')"
+>
+  <!-- Overlay oscuro -->
+  <div class="absolute inset-0 bg-black/60"></div>
+
+  <!-- Contenido -->
+  <div class="relative z-10 max-w-3xl">
+
+    <h2
+      class="text-2xl sm:text-3xl md:text-4xl font-light leading-relaxed text-white hidden-anim observe"
+    >
+    Ponme como un sello sobre tu corazón,
+    como un sello sobre tu brazo,
+    porque el amor es tan fuerte como la muerte,
+    y la devoción total, tan exigente como la Tumba.
+    Sus llamas son un fuego ardiente, la llama de Jah.
+
+    </h2>
+
+    <p
+        class="text-lg sm:text-xl md:text-2xl tracking-widest text-gold mb-6 hidden-anim observe"
+    >
+      El Cantar de los Cantares 8:6
+    </p>
+
+  </div>
+</section>
+<script src="script.js" defer></script>
+</body>
+</html>
