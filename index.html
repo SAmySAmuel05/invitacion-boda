@@ -57,7 +57,6 @@
   }
 }
 
-
 .animate-scroll {
   animation: scrollHint 2.2s ease-in-out infinite;
 }
@@ -97,6 +96,37 @@
   .delay-200 {
   transition-delay: 0.2s;
 }
+.timeline-line::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--progress, 0%);
+  background: linear-gradient(to bottom, #d4af37, rgba(212,175,55,0.4));
+  transition: height 0.8s ease;
+}
+
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 0 rgba(212,175,55,0.4);
+  }
+  50% {
+    box-shadow: 0 0 12px rgba(212,175,55,0.8);
+  }
+  100% {
+    box-shadow: 0 0 0 rgba(212,175,55,0.4);
+  }
+}
+
+.timeline-dot.active {
+  animation: glow 2s infinite;
+}
+h3 {
+  overflow-wrap: anywhere;
+}
+
 
 </style>
 
@@ -123,7 +153,7 @@
   class="relative min-h-screen bg-cover bg-center flex flex-col justify-between px-6 py-16 sm:py-20"
   style="background-image: url('media/images/pareja.jpeg');"
 >
-
+<section id="inicio"></section>
   <!-- Overlay -->
   <div class="absolute inset-0 bg-black/60"></div>
 
@@ -256,7 +286,566 @@
     </p>
 
   </div>
+<button
+  class="scroll-btn absolute bottom-6 left-1/2 -translate-x-1/2 z-30
+         text-center cursor-pointer bg-transparent border-none"
+  data-scroll="detalles"
+>
+  <p class="text-sm uppercase tracking-widest text-gold mb-2">
+    Desliza para ver más
+  </p>
+
+  <div class="w-5 h-9 border-2 border-gold rounded-full mx-auto flex justify-center">
+    <span class="w-1 h-2 bg-gold rounded-full mt-2 animate-scroll"></span>
+  </div>
+</button>
 </section>
+
+<section
+  id="detalles"
+  class="relative min-h-screen bg-black flex items-center justify-center px-6 py-24"
+>
+
+  <!-- Overlay sutil -->
+  <div class="absolute inset-0 bg-black/80"></div>
+
+  <div class="relative z-10 max-w-5xl w-full text-center">
+
+    <!-- Frase de transición -->
+    <p
+      class="text-lg sm:text-xl text-gray-200 mb-16 hidden-anim observe leading-relaxed"
+    >
+      Por todo lo que hemos vivido y lo que creemos,
+      queremos compartir nuestra felicidad contigo
+      e invitarte a celebrar nuestra boda.
+    </p>
+
+    <!-- Título -->
+    <h2
+      class="text-4xl sm:text-5xl md:text-6xl text-gold mb-16 hidden-anim observe"
+    >
+      Detalles del evento
+    </h2>
+
+    <!-- Tarjetas -->
+    <div
+      class="grid grid-cols-1 md:grid-cols-3 gap-8"
+    >
+
+      <section id="ubicacion" class="py-20 px-6 bg-black text-white">
+  <div class="max-w-3xl mx-auto text-center">
+
+    <h2 class="text-4xl text-gold mb-6 hidden-anim observe">
+      Ubicación
+    </h2>
+
+    <p class="mb-6 text-lg text-gray-300 hidden-anim observe">
+      Acompáñanos a celebrar este día tan especial
+    </p>
+
+    <!-- Card ubicación -->
+    <div class="bg-black/40 border border-gold/30 rounded-2xl p-6">
+
+      <h3 class="text-2xl text-gold mb-2">
+        Lugar del evento
+      </h3>
+
+      <p class="text-gray-300 mb-4">
+        Dirección pendiente de confirmar
+      </p>
+
+      <!-- Botón desplegar -->
+      <button
+        class="toggle-map text-gold uppercase tracking-widest text-sm mb-4"
+        aria-expanded="false"
+      >
+        Ver mapa ↓
+      </button>
+
+      <!-- Contenedor mapa -->
+      <div
+        class="map-container overflow-hidden max-h-0 transition-all duration-700 ease-in-out"
+      >
+        <div class="mt-4 rounded-xl overflow-hidden">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3761.6569340424862!2d-99.18579071760176!3d19.470352637795333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f884745cec7b%3A0xcf2b0423e37d6268!2sSal%C3%B3n%20de%20Asambleas%20de%20los%20testigos%20de%20Jehov%C3%A1!5e0!3m2!1ses-419!2smx!4v1768035229716!5m2!1ses-419!2smx"
+            class="w-full h-72 border-0"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+
+        <a
+          href="https://maps.app.goo.gl/CwWVMxvs1t3VePBp7"
+          target="_blank"
+          class="inline-block mt-4 text-gold underline text-sm"
+        >
+          Abrir en Google Maps
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+      <!-- Vestimenta -->
+      <section
+  id="vestimenta"
+  class="relative min-h-screen bg-black flex items-center justify-center px-6 py-20"
+>
+  <div class="max-w-5xl w-full text-center">
+
+    <h2 class="text-4xl sm:text-5xl text-gold mb-12 hidden-anim observe">
+      Código de vestimenta
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+
+      <!-- DAMAS -->
+<div class="flex flex-col items-center">
+
+  <div
+  class="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur
+         hidden-anim observe w-full max-w-xs"
+>
+
+    <h3 class="text-2xl text-gold mb-4">Damas</h3>
+
+    <p class="text-gray-300 mb-4">
+      Vestido largo o midi, colores sobrios o pasteles.
+    </p>
+
+    <div class="flex justify-center gap-3 mt-4">
+      <span class="w-6 h-6 rounded-full bg-rose-400"></span>
+      <span class="w-6 h-6 rounded-full bg-emerald-300"></span>
+      <span class="w-6 h-6 rounded-full bg-slate-400"></span>
+    </div>
+  </div>
+
+  <button
+    class="mt-6 text-sm uppercase tracking-widest text-gold
+           border border-gold px-6 py-2 rounded-full
+           hover:bg-gold hover:text-black transition"
+    data-modal="modal-damas"
+  >
+    Ver ejemplos
+  </button>
+
+</div>
+
+
+      <!-- CABALLEROS -->
+<div class="flex flex-col items-center">
+
+  <div
+  class="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur
+         hidden-anim observe w-full max-w-sm"
+>
+
+
+    <h3 class="text-2xl text-gold mb-4">Caballeros</h3>
+
+    <p class="text-gray-300 mb-4">
+      Traje formal o saco y pantalón de vestir.
+    </p>
+
+    <div class="flex justify-center gap-3 mt-4">
+      <span class="w-6 h-6 rounded-full bg-slate-800"></span>
+      <span class="w-6 h-6 rounded-full bg-gray-600"></span>
+      <span class="w-6 h-6 rounded-full bg-stone-500"></span>
+    </div>
+  </div>
+
+  <button
+    class="mt-6 text-sm uppercase tracking-widest text-gold
+           border border-gold px-6 py-2 rounded-full
+           hover:bg-gold hover:text-black transition"
+    data-modal="modal-caballeros"
+  >
+    Ver ejemplos
+  </button>
+
+</div>
+
+</section>
+<div
+  id="modal-damas"
+  class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center
+         opacity-0 pointer-events-none transition"
+>
+  <div class="bg-black border border-white/10 rounded-2xl max-w-3xl w-full mx-6 p-6 relative scale-95 transition">
+
+    <!-- Cerrar -->
+    <button
+      class="absolute top-4 right-4 text-white text-xl"
+      data-close
+    >✕</button>
+
+    <h3 class="text-2xl text-gold mb-6 text-center">
+      Ejemplos – Damas
+    </h3>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+      <img src="media/images/mujer1.jpeg" class="rounded-lg" />
+      <img src="media/images/mujer2.jpeg" class="rounded-lg" />
+      <img src="media/images/mujer 3.jpeg" class="rounded-lg" />
+    </div>
+  </div>
+</div>
+
+<div
+  id="modal-caballeros"
+  class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center
+         opacity-0 pointer-events-none transition"
+>
+  <div class="bg-black border border-white/10 rounded-2xl max-w-3xl w-full mx-6 p-6 relative scale-95 transition">
+
+    <button
+      class="absolute top-4 right-4 text-white text-xl"
+      data-close
+    >✕</button>
+
+    <h3 class="text-2xl text-gold mb-6 text-center">
+      Ejemplos – Caballeros
+    </h3>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+      <img src="media/images/hombre1.jpeg" class="rounded-lg" />
+      <img src="media/images/hombre2.jpeg" class="rounded-lg" />
+      <img src="media/images/hombre3.jpeg" class="rounded-lg" />
+    </div>
+  </div>
+</div>
+
+      <!-- Itinerario -->
+<section id="itinerario" class="relative min-h-screen bg-black px-6 py-24">
+  <div class="max-w-4xl mx-auto text-center">
+
+    <h2 class="text-4xl sm:text-5xl text-gold mb-16 hidden-anim observe">
+      Itinerario
+    </h2>
+
+    <div class="relative max-w-xl mx-auto">
+
+      <!-- Línea -->
+      <div class="timeline-line absolute left-4 top-0 bottom-0 w-px bg-gold/20"></div>
+      <div
+          id="timeline-progress"
+         class="absolute left-4 top-0 w-px bg-gold transition-all duration-700"
+         style="height: 0%">
+      </div>
+
+      <!-- ITEM -->
+      <div class="relative pl-12 mb-12 observe hidden-anim">
+        <div class="timeline-dot absolute left-1.5 top-1 w-3 h-3 bg-gold rounded-full"></div>
+
+        <button class="w-full text-left itinerary-btn">
+          <h3 class="text-xl text-white">Ceremonia</h3>
+          <p class="text-sm text-gold">13:00 hrs</p>
+        </button>
+
+        <div class="itinerary-content mt-4 text-gray-300 hidden">
+          <p>Lugar por confirmar</p>
+        </div>
+      </div>
+      <div class="relative pl-12 mb-12 observe hidden-anim">
+        <div class="timeline-dot absolute left-1.5 top-1 w-3 h-3 bg-gold rounded-full"></div>
+
+        <button class="w-full text-left itinerary-btn">
+          <h3 class="text-xl text-white">Comida</h3>
+          <p class="text-sm text-gold">15:00 hrs</p>
+        </button>
+
+        <div class="itinerary-content mt-4 text-gray-300 hidden">
+          <p>Queremos compartir una rica comida con nuestros invitados</p>
+        </div>
+      </div>
+      <div class="relative pl-12 mb-12 observe hidden-anim">
+        <div class="timeline-dot absolute left-1.5 top-1 w-3 h-3 bg-gold rounded-full"></div>
+
+        <button class="w-full text-left itinerary-btn">
+          <h3 class="text-xl text-white">Baile</h3>
+          <p class="text-sm text-gold">17:00 hrs</p>
+        </button>
+
+        <div class="itinerary-content mt-4 text-gray-300 hidden">
+          <p>Saca tus mejores pasos!</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <button
+  class="scroll-btn absolute bottom-6 left-1/2 -translate-x-1/2 z-30
+         text-center cursor-pointer bg-transparent border-none"
+  data-scroll="mesa-regalos"
+>
+  <p class="text-sm uppercase tracking-widest text-gold mb-2">
+    Desliza para ver más
+  </p>
+
+  <div class="w-5 h-9 border-2 border-gold rounded-full mx-auto flex justify-center">
+    <span class="w-1 h-2 bg-gold rounded-full mt-2 animate-scroll"></span>
+  </div>
+</button>
+</section>
+
+</div>
+<!-- Mesa de Regalos -->
+<section
+  id="mesa-regalos"
+  class="relative min-h-screen bg-black flex items-center justify-center px-6 py-20"
+>
+  <div class="max-w-5xl w-full text-center">
+
+    <h2 class="text-4xl sm:text-5xl text-gold mb-6 hidden-anim observe">
+      Mesa de regalos
+    </h2>
+
+    <p class="text-gray-300 max-w-2xl mx-auto mb-16 hidden-anim observe">
+      Su presencia es nuestro mejor regalo.  
+      Si desean obsequiarnos algo más, aquí les compartimos algunas opciones.
+    </p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 place-items-center">
+
+      <!-- AMAZON -->
+      <div
+        class="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur
+               w-full max-w-xs hidden-anim observe"
+      >
+        <h3 class="text-xl text-gold mb-4">Amazon</h3>
+
+        <p class="text-gray-400 mb-6 text-sm">
+          Lista de regalos en línea
+        </p>
+
+        <a
+          href="https://www.amazon.com.mx/"
+          target="_blank"
+          class="inline-block text-sm uppercase tracking-widest text-gold
+                 border border-gold px-6 py-2 rounded-full
+                 hover:bg-gold hover:text-black transition"
+        >
+          Ver lista
+        </a>
+      </div>
+
+      <!-- LIVERPOOL -->
+      <div
+        class="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur
+               w-full max-w-xs hidden-anim observe"
+      >
+        <h3 class="text-xl text-gold mb-4">Liverpool</h3>
+
+        <p class="text-gray-400 mb-6 text-sm">
+          Mesa de regalos
+        </p>
+
+        <a
+          href="https://www.liverpool.com.mx/"
+          target="_blank"
+          class="inline-block text-sm uppercase tracking-widest text-gold
+                 border border-gold px-6 py-2 rounded-full
+                 hover:bg-gold hover:text-black transition"
+        >
+          Ver mesa
+        </a>
+      </div>
+
+      <!-- EFECTIVO / TRANSFERENCIA -->
+      <div
+        class="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur
+               w-full max-w-xs hidden-anim observe"
+      >
+        <h3 class="text-xl text-gold mb-4">Regalo en efectivo</h3>
+
+        <p class="text-gray-400 mb-6 text-sm">
+          Lluvia de sobres o transferencia
+        </p>
+
+        <button
+  class="text-sm uppercase tracking-widest text-gold
+         border border-gold px-6 py-2 rounded-full
+         hover:bg-gold hover:text-black transition"
+  data-modal="modal-regalo"
+>
+  Ver detalles
+</button>
+<!-- Modal Mesa de Regalos -->
+<div
+  id="modal-regalo"
+  class="fixed inset-0 bg-black/80 flex items-center justify-center
+         opacity-0 pointer-events-none transition duration-500 z-50"
+>
+  <div
+    class="bg-black border border-gold rounded-2xl p-8 max-w-md w-full mx-4
+           transform scale-95 transition duration-500"
+  >
+
+    <h3 class="text-2xl text-gold mb-4 text-center">
+      Regalo en efectivo
+    </h3>
+
+    <p class="text-gray-300 text-sm text-center mb-6">
+      Si desean apoyarnos con un obsequio en efectivo, pueden hacerlo mediante
+      transferencia bancaria o lluvia de sobres el día del evento.
+    </p>
+
+    <div class="text-gray-200 text-sm space-y-2">
+      <p><span class="text-gold">Banco:</span> XXXXX</p>
+      <p><span class="text-gold">Cuenta:</span> XXXX XXXX XXXX XXXX</p>
+      <p><span class="text-gold">CLABE:</span> XXX XXX XXX XXX XXX XXX</p>
+      <p><span class="text-gold">Titular:</span> Nombre del titular</p>
+    </div>
+
+    <button
+      class="mt-8 block mx-auto text-sm uppercase tracking-widest text-gold
+             border border-gold px-6 py-2 rounded-full
+             hover:bg-gold hover:text-black transition"
+      data-close
+    >
+      Cerrar
+    </button>
+
+  </div>
+</div>
+
+      </div>
+
+    </div>
+  </div>
+  <button
+  class="scroll-btn absolute bottom-6 left-1/2 -translate-x-1/2 z-30
+         text-center cursor-pointer bg-transparent border-none"
+  data-scroll="rsvp"
+>
+  <div class="w-5 h-9 border-2 border-gold rounded-full mx-auto flex justify-center">
+    <span class="w-1 h-2 bg-gold rounded-full mt-2 animate-scroll"></span>
+  </div>
+</button>
+</section>
+
+<section
+  id="rsvp"
+  class="relative min-h-screen bg-black flex items-center justify-center px-6 py-20"
+>
+
+  <div class="max-w-3xl w-full text-center hidden-anim observe">
+
+    <h2 class="text-4xl sm:text-5xl text-gold mb-6">
+      Confirmación de asistencia
+    </h2>
+
+    <p class="text-gray-300 mb-10">
+      Para nosotros es muy importante saber si nos acompañarás
+      en este día tan especial.
+    </p>
+
+    <button
+      class="text-sm uppercase tracking-widest text-gold
+             border border-gold px-8 py-3 rounded-full
+             hover:bg-gold hover:text-black transition"
+      data-modal="modal-rsvp"
+    >
+      Confirmar asistencia
+    </button>
+
+  </div>
+</section>
+<!-- Modal RSVP -->
+<div
+  id="modal-rsvp"
+  class="fixed inset-0 bg-black/80 flex items-center justify-center
+         opacity-0 pointer-events-none transition duration-500 z-50"
+>
+
+  <div
+    class="bg-black border border-gold rounded-2xl p-8 max-w-md w-full mx-4
+           transform scale-95 transition duration-500 text-center"
+  >
+
+    <h3 class="text-2xl text-gold mb-4">
+      Confirmación de asistencia
+    </h3>
+
+    <p class="text-gray-300 text-sm mb-6">
+      Serás redirigido a un breve formulario para confirmar tu asistencia.
+    </p>
+
+    <a
+      href="https://forms.gle/dh6yH4QJTZ7L1UoV9"
+      target="_blank"
+      class="inline-block text-sm uppercase tracking-widest text-black
+             bg-gold px-6 py-3 rounded-full hover:opacity-90 transition"
+    >
+      Ir al formulario
+    </a>
+
+    <button
+      class="mt-6 block mx-auto text-sm uppercase tracking-widest text-gold
+             border border-gold px-6 py-2 rounded-full
+             hover:bg-gold hover:text-black transition"
+      data-close
+    >
+      Cerrar
+    </button>
+
+  </div>
+  <a
+  href="https://wa.me/525582573307?text=Confirmo%20mi%20asistencia%20a%20su%20boda"
+  target="_blank"
+  class="text-sm uppercase tracking-widest text-gold
+         border border-gold px-8 py-3 rounded-full
+         hover:bg-gold hover:text-black transition"
+>
+  Confirmar por WhatsApp
+</a>
+
+</div>
+
+<section
+  id="indice"
+  class="relative bg-black flex items-center justify-center px-6 py-20"
+>
+  <div class="max-w-3xl w-full text-center">
+
+    <h2 class="text-3xl sm:text-4xl text-gold mb-8">
+      Navegación
+    </h2>
+
+    <div class="flex flex-col gap-4">
+      
+
+      <button data-scroll="#inicio" class="nav-btn text-sm uppercase tracking-widest text-gold
+         border border-gold px-6 py-3 rounded-full
+         hover:bg-gold hover:text-black transition">Inicio</button>
+      <button data-scroll="#historia" class="nav-btn text-sm uppercase tracking-widest text-gold
+         border border-gold px-6 py-3 rounded-full
+         hover:bg-gold hover:text-black transition">Nuestra historia</button>
+      <button data-scroll="#biblia" class="nav-btn text-sm uppercase tracking-widest text-gold
+         border border-gold px-6 py-3 rounded-full
+         hover:bg-gold hover:text-black transition">Versículo</button>
+      <button data-scroll="#ubicacion" class="nav-btn text-sm uppercase tracking-widest text-gold
+         border border-gold px-6 py-3 rounded-full
+         hover:bg-gold hover:text-black transition">Ubicación</button>
+      <button data-scroll="#vestimenta" class="nav-btn text-sm uppercase tracking-widest text-gold
+         border border-gold px-6 py-3 rounded-full
+         hover:bg-gold hover:text-black transition">Vestimenta</button>
+      <button data-scroll="#itinerario" class="nav-btn text-sm uppercase tracking-widest text-gold
+         border border-gold px-6 py-3 rounded-full
+         hover:bg-gold hover:text-black transition">Itinerario</button>
+      <button data-scroll="#rsvp" class="nav-btn text-sm uppercase tracking-widest text-gold
+         border border-gold px-6 py-3 rounded-full
+         hover:bg-gold hover:text-black transition">Confirmación</button>
+
+    </div>
+
+  </div>
+</section>
+
+
 <script src="script.js" defer></script>
 </body>
 </html>

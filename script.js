@@ -1,3 +1,13 @@
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  document.documentElement.style.scrollBehavior = "auto";
+  window.scrollTo(0, 0);
+});
+
+
 const startBtn = document.getElementById("startBtn");
 const overlay = document.getElementById("overlay");
 const music = document.getElementById("music");
@@ -102,24 +112,23 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-function smoothScrollTo(targetY, duration = 1500) {
+
+function smoothScrollTo(targetY, duration = 3500) {
   const startY = window.pageYOffset;
   const distance = targetY - startY;
   let startTime = null;
 
   function animation(currentTime) {
     if (!startTime) startTime = currentTime;
-    const timeElapsed = currentTime - startTime;
-    const progress = Math.min(timeElapsed / duration, 1);
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
 
-    // easing (suave y elegante)
-    const ease = progress < 0.5
-      ? 2 * progress * progress
-      : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+    // Easing elegante y constante
+    const ease = progress;
 
     window.scrollTo(0, startY + distance * ease);
 
-    if (timeElapsed < duration) {
+    if (progress < 1) {
       requestAnimationFrame(animation);
     }
   }
@@ -127,7 +136,121 @@ function smoothScrollTo(targetY, duration = 1500) {
   requestAnimationFrame(animation);
 }
 
+
 initSmoothScrollButtons();
+
+  document.querySelectorAll('.toggle-map').forEach(button => {
+    button.addEventListener('click', () => {
+      const container = button.nextElementSibling;
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+
+      button.setAttribute('aria-expanded', !expanded);
+      button.textContent = expanded ? 'Ver mapa ↓' : 'Ocultar mapa ↑';
+
+      if (expanded) {
+        container.style.maxHeight = '0px';
+      } else {
+        container.style.maxHeight = container.scrollHeight + 'px';
+      }
+    });
+  });
+
+  const modalButtons = document.querySelectorAll("[data-modal]");
+const closeButtons = document.querySelectorAll("[data-close]");
+
+
+modalButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const modal = document.getElementById(btn.dataset.modal);
+    openModal(modal);
+  });
+});
+
+
+closeButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    closeModal(btn.closest(".fixed"));
+  });
+});
+
+function openModal(modal) {
+  modal.classList.remove("opacity-0", "pointer-events-none");
+  modal.querySelector("div").classList.remove("scale-95");
+}
+
+function closeModal(modal) {
+  modal.classList.add("opacity-0", "pointer-events-none");
+  modal.querySelector("div").classList.add("scale-95");
+}
+
+document.querySelectorAll(".itinerary-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const content = btn.nextElementSibling;
+    const dot = btn.parentElement.querySelector(".timeline-dot");
+    const line = document.querySelector(".timeline-line");
+    const items = [...document.querySelectorAll(".itinerary-btn")];
+    const index = items.indexOf(btn);
+    const progress = ((index + 1) / items.length) * 100;
+
+    line.style.setProperty("--progress", `${progress}%`);
+
+    // Cerrar otros
+    document.querySelectorAll(".itinerary-content").forEach(c => {
+      if (c !== content) c.classList.add("hidden");
+    });
+
+    document.querySelectorAll(".timeline-dot").forEach(d => {
+      d.classList.remove("active");
+    });
+
+    // Abrir actual
+    content.classList.toggle("hidden");
+    dot.classList.add("active");
+
+    // Scroll centrado
+    const y =
+      btn.parentElement.getBoundingClientRect().top +
+      window.pageYOffset -
+      window.innerHeight / 2 +
+      btn.parentElement.offsetHeight / 2;
+
+    smoothScrollTo(y, 1200);
+    
+  });
+});
+
+document.querySelectorAll("[data-scroll]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const target = document.querySelector(btn.dataset.scroll);
+    if (!target) return;
+
+    const y =
+      target.getBoundingClientRect().top + window.pageYOffset;
+
+    smoothScrollTo(y, 1800);
+  });
+});
+
+const sections = document.querySelectorAll("section");
+
+window.addEventListener("scroll", () => {
+  sections.forEach(sec => {
+    const top = sec.getBoundingClientRect().top;
+    if (top >= -100 && top < 300) {
+      // aquí puedes marcar activa en el índice
+    }
+  });
+});
+
+
+
+
+
+
+
+
+
+
 
 
 
