@@ -11,13 +11,42 @@ window.addEventListener("DOMContentLoaded", () => {
 const startBtn = document.getElementById("startBtn");
 const overlay = document.getElementById("overlay");
 const music = document.getElementById("music");
-const weddingDate = new Date(2026, 5, 10, 13, 0, 0);
+const weddingDate = new Date(2026, 5, 6, 14, 0, 0);
 const scrollBtn = document.getElementById("scrollHistoria");
 const historiaSection = document.getElementById("historia");
 const bibliaSection = document.getElementById("biblia");
+const musicToggle = document.getElementById("music-toggle");
+const musicIcon = document.getElementById("music-icon");
+
 
 startBtn.addEventListener("click", () => {
   music.play();
+
+musicToggle.addEventListener("click", (e) => {
+  e.stopPropagation(); // evita conflictos con otros clicks
+
+if (music.paused) {
+  music.play();
+  musicIcon.src = "media/images/icons/boton-de-pausa.png";
+} else {
+  fadeOut(music);
+  musicIcon.src = "media/images/icons/jugar-buttton.png";
+}
+});
+
+function fadeOut(audio) {
+  const fade = setInterval(() => {
+    if (audio.volume > 0.05) {
+      audio.volume -= 0.05;
+    } else {
+      audio.pause();
+      audio.volume = 0.4;
+      clearInterval(fade);
+    }
+  }, 50);
+}
+
+
 
   overlay.classList.add("opacity-0");
 
@@ -183,41 +212,45 @@ function closeModal(modal) {
   modal.querySelector("div").classList.add("scale-95");
 }
 
-document.querySelectorAll(".itinerary-btn").forEach(btn => {
+document.querySelectorAll(".itinerary-btn").forEach((btn, index) => {
   btn.addEventListener("click", () => {
+    const item = btn.parentElement;
     const content = btn.nextElementSibling;
-    const dot = btn.parentElement.querySelector(".timeline-dot");
-    const line = document.querySelector(".timeline-line");
+    const icon = item.querySelector(".icon-anim");
+    const line = document.getElementById("timeline-progress");
+
     const items = [...document.querySelectorAll(".itinerary-btn")];
-    const index = items.indexOf(btn);
     const progress = ((index + 1) / items.length) * 100;
 
-    line.style.setProperty("--progress", `${progress}%`);
+    // Iluminar línea
+    line.style.height = `${progress}%`;
 
-    // Cerrar otros
+    // Cerrar otros contenidos
     document.querySelectorAll(".itinerary-content").forEach(c => {
       if (c !== content) c.classList.add("hidden");
     });
 
-    document.querySelectorAll(".timeline-dot").forEach(d => {
-      d.classList.remove("active");
+    // Apagar iconos
+    document.querySelectorAll(".icon-anim").forEach(i => {
+      i.classList.remove("active");
     });
 
-    // Abrir actual
+    // Activar actual
     content.classList.toggle("hidden");
-    dot.classList.add("active");
+    icon.classList.add("active");
 
-    // Scroll centrado
+    // Scroll elegante centrado
     const y =
-      btn.parentElement.getBoundingClientRect().top +
+      item.getBoundingClientRect().top +
       window.pageYOffset -
       window.innerHeight / 2 +
-      btn.parentElement.offsetHeight / 2;
+      item.offsetHeight / 2;
 
     smoothScrollTo(y, 1200);
-    
   });
 });
+
+
 
 document.querySelectorAll("[data-scroll]").forEach(btn => {
   btn.addEventListener("click", () => {
@@ -241,16 +274,3 @@ window.addEventListener("scroll", () => {
     }
   });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-

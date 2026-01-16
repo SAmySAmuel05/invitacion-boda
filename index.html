@@ -2,14 +2,20 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Invitación de Boda</title>
+  <link rel="icon" type="image/png" href="media/images/icons/J-S.jpeg">
+  <title>Invitación a nuestra boda Josué y Samantha</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Josué & Samantha">
+<meta property="og:description" content="Nos vamos a casar · 06 de junio de 2026">
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
+  <script src="https://unpkg.com/lucide@latest"></script>
+
   <!-- Fuente elegante -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 
   
   <script>
@@ -107,6 +113,10 @@
   transition: height 0.8s ease;
 }
 
+ .font-script {
+  font-family: 'Great Vibes', cursive;
+}
+
 
 @keyframes glow {
   0% {
@@ -127,21 +137,98 @@ h3 {
   overflow-wrap: anywhere;
 }
 
+/* Línea base */
+.timeline-line {
+  background: rgba(212, 175, 55, 0.25);
+}
+
+/* Progreso iluminado */
+#timeline-progress {
+  background: linear-gradient(
+    to bottom,
+    #f5d98a,
+    #d4af37
+  );
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
+}
+
+/* Iconos */
+.icon-anim {
+  opacity: 0.6;
+  filter: grayscale(100%);
+  transform: scale(0.9);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease,
+    filter 0.4s ease,
+    drop-shadow 0.4s ease;
+}
+
+/* Icono activo */
+.icon-anim.active {
+  opacity: 1;
+  filter: grayscale(0%);
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.8));
+}
+
+.icon-anim {
+  opacity: 0.6;
+  transform: scale(0.9);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.itinerary-btn:focus-visible + .itinerary-content,
+.itinerary-btn.active ~ img {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
 
 </style>
 
 </head>
 
+<button
+  id="music-toggle"
+  class="fixed bottom-6 right-6 z-50
+         w-12 h-12 rounded-full
+         bg-black/60 border border-gold
+         flex items-center justify-center
+         backdrop-blur
+         hover:bg-gold transition">
+  <img
+    id="music-icon"
+    src="media/images/icons/boton-de-pausa.png"
+    class="w-6 h-6"
+    alt="Control de música"
+  />
+</button>
+
+
 <body class="bg-black text-white font-elegant overflow-x-hidden scroll-smooth">
 
   <!-- Overlay inicial -->
-  <div id="overlay"
-  class="fixed inset-0 bg-black flex items-center justify-center z-50 transition-opacity duration-700">
-    <button id="startBtn"
-      class="border border-gold text-gold px-8 py-4 text-lg tracking-widest hover:bg-gold hover:text-black transition">
-      TOCA PARA COMENZAR
-    </button>
-  </div>
+<div
+  id="overlay"
+  class="fixed inset-0 flex items-center justify-center z-50
+         bg-black/80 bg-cover bg-no-repeat
+         transition-opacity duration-700"
+  style="
+    background-image: url('media/images/icons/J_S.jpeg');
+    background-position: center 65%;
+  "
+>
+  <button
+    id="startBtn"
+    class="relative z-10 border border-gold text-gold
+           px-8 py-4 text-lg tracking-widest
+           hover:bg-gold hover:text-black transition"
+  >
+    TOCA PARA COMENZAR
+  </button>
+</div>
+
 
   <!-- Música -->
   <audio id="music" loop>
@@ -150,36 +237,55 @@ h3 {
 
   <!-- Contenido principal -->
 <main
-  class="relative min-h-screen bg-cover bg-center flex flex-col justify-between px-6 py-16 sm:py-20"
+  class="relative min-h-screen bg-cover bg-center flex flex-col justify-start px-6 py-16 sm:py-20"
   style="background-image: url('media/images/pareja.jpeg');"
 >
+
 <section id="inicio"></section>
   <!-- Overlay -->
   <div class="absolute inset-0 bg-black/60"></div>
 
   <!-- CONTENIDO SUPERIOR -->
-  <div class="relative z-10 text-center pt-16 sm:pt-24 md:pt-32">
+<div
+  class="absolute top-20 sm:top-24 md:top-32 left-1/2 -translate-x-1/2
+         text-center z-10"
+>
 
-    <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-gold mb-6 hidden-anim observe">
-      Josue & Samantha
-    </h1>
 
-    <p class="text-xl sm:text-2xl md:text-3xl tracking-widest mb-4 hidden-anim observe">
-      NOS VAMOS A CASAR!!!
-    </p>
 
-    <p class="text-lg sm:text-xl md:text-2xl hidden-anim observe">
-      10 de Junio de 2026
-    </p>
+  <h1
+  class="font-script text-7xl sm:text-8xl md:text-9xl lg:text-[10rem]
+         text-gold mb-2 leading-tight tracking-wide
+         hidden-anim observe
+         drop-shadow-[0_0_18px_rgba(212,175,55,0.35)]"
+>
+  Josué & Samantha
+</h1>
 
-  </div>
+
+  <p
+    class="text-base sm:text-lg md:text-xl tracking-widest mb-2
+           hidden-anim observe"
+  >
+    NOS VAMOS A CASAR
+  </p>
+
+  <p
+    class="text-sm sm:text-base md:text-lg hidden-anim observe"
+  >
+    06 de Junio de 2026
+  </p>
+
+</div>
+
+
 
   <!-- CONTADOR INFERIOR -->
     <div
-        id="countdown"
-         class="relative z-10 flex justify-center gap-6 sm:gap-8 text-gold text-center hidden-anim pb-6"
-    >
-
+  id="countdown"
+  class="relative z-10 flex justify-center gap-6 sm:gap-8
+         text-gold text-center hidden-anim pb-6 mt-auto"
+>
 
     <div>
       <span id="days" class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold"></span>
@@ -204,11 +310,19 @@ h3 {
   </div>
 
     <button
-        class="scroll-btn relative z-10 mb-4 text-white text-sm tracking-widest animate-bounce"
-        data-scroll="historia"
-    >
-    DESLIZA PARA VER MÁS ↓
-    </button>
+  class="scroll-btn absolute bottom-6 left-1/2 -translate-x-1/2 z-30
+         text-center cursor-pointer bg-transparent border-none"
+  data-scroll="historia"
+>
+  <p class="text-sm uppercase tracking-widest text-gold mb-2">
+    Desliza para ver más
+  </p>
+
+  <div class="w-5 h-9 border-2 border-gold rounded-full mx-auto flex justify-center">
+    <span class="w-1 h-2 bg-gold rounded-full mt-2 animate-scroll"></span>
+  </div>
+</button>
+
 
 
 </main>
@@ -216,7 +330,7 @@ h3 {
 <section
   id="historia"
   class="relative min-h-screen bg-cover bg-center flex items-center justify-center px-6 py-20"
-  style="background-image: url('media/images/pareja2.jpeg');"
+  style="background-image: url('media/images/pareja3.jpeg');"
 >
 
   <!-- Overlay -->
@@ -230,12 +344,9 @@ h3 {
   Nuestra historia
 </h2>
 
-<p
-  class="text-lg sm:text-xl leading-relaxed text-gray-200 hidden-anim observe">
-  Todo comenzó con una mirada, una conversación inesperada.
-  <br><br>
-  Hoy, después de risas, aprendizajes y amor compartido, decidimos dar
-  este paso juntos y celebrar con quienes más queremos.
+<p class="text-2xl sm:text-3xl md:text-4xl font-light leading-relaxed text-white mb-8 hidden-anim observe">
+  "Un primer encuentro que quedó grabado en nuestras mentes, y como si se tratara de una contestación de Jehová a nuestras oraciones, nuestra historia comenzó al convertirnos en el compañerito de servicio del otro.
+<br><br>Y ahora, después de risas, aprendizajes, crecimiento y mucho amor, hemos decidido también ser compañeritos de vida para amarnos por toda la eternidad"
 </p>
 
 </div>
@@ -269,19 +380,18 @@ h3 {
   <div class="relative z-10 max-w-3xl">
 
     <h2
-      class="text-2xl sm:text-3xl md:text-4xl font-light leading-relaxed text-white hidden-anim observe"
+      class="text-2xl sm:text-3xl md:text-4xl font-light leading-relaxed text-white mb-8 hidden-anim observe"
     >
-    Ponme como un sello sobre tu corazón,
+    "Ponme como un sello sobre tu corazón,
     como un sello sobre tu brazo,
     porque el amor es tan fuerte como la muerte,
     y la devoción total, tan exigente como la Tumba.
-    Sus llamas son un fuego ardiente, la llama de Jah.
+    Sus llamas son un fuego ardiente, la llama de Jah."
 
     </h2>
 
     <p
-        class="text-lg sm:text-xl md:text-2xl tracking-widest text-gold mb-6 hidden-anim observe"
-    >
+        class="text-lg sm:text-xl md:text-2xl tracking-widest text-gold mb-8 hidden-anim observe">
       El Cantar de los Cantares 8:6
     </p>
 
@@ -303,36 +413,26 @@ h3 {
 
 <section
   id="detalles"
-  class="relative min-h-screen bg-black flex items-center justify-center px-6 py-24"
+  class="relative min-h-screen bg-cover
+         bg-[50%_20%]
+         md:bg-[50%_30%]
+         flex items-center justify-center
+         px-6 py-20"
+  style="background-image: url('media/images/pareja4.jpeg');"
 >
 
-  <!-- Overlay sutil -->
-  <div class="absolute inset-0 bg-black/80"></div>
+
+  <div class="absolute inset-0 bg-black/70"></div>
 
   <div class="relative z-10 max-w-5xl w-full text-center">
 
-    <!-- Frase de transición -->
-    <p
-      class="text-lg sm:text-xl text-gray-200 mb-16 hidden-anim observe leading-relaxed"
-    >
-      Por todo lo que hemos vivido y lo que creemos,
-      queremos compartir nuestra felicidad contigo
-      e invitarte a celebrar nuestra boda.
-    </p>
-
     <!-- Título -->
-    <h2
-      class="text-4xl sm:text-5xl md:text-6xl text-gold mb-16 hidden-anim observe"
-    >
+    <h2 class="text-4xl sm:text-5xl md:text-6xl text-gold mb-16 hidden-anim observe">
       Detalles del evento
     </h2>
-
     <!-- Tarjetas -->
-    <div
-      class="grid grid-cols-1 md:grid-cols-3 gap-8"
-    >
 
-      <section id="ubicacion" class="py-20 px-6 bg-black text-white">
+      <section id="ubicacion" class="py-20 px-6 bg-cover text-white">
   <div class="max-w-3xl mx-auto text-center">
 
     <h2 class="text-4xl text-gold mb-6 hidden-anim observe">
@@ -340,7 +440,8 @@ h3 {
     </h2>
 
     <p class="mb-6 text-lg text-gray-300 hidden-anim observe">
-      Acompáñanos a celebrar este día tan especial
+      ¡Nos encantaria que compartieras este dia tan especial con nosotros!
+      <br>¿Donde?
     </p>
 
     <!-- Card ubicación -->
@@ -351,7 +452,7 @@ h3 {
       </h3>
 
       <p class="text-gray-300 mb-4">
-        Dirección pendiente de confirmar
+        Camino real al Oyameyo 80 (Cerca de Rancho magico)
       </p>
 
       <!-- Botón desplegar -->
@@ -368,7 +469,7 @@ h3 {
       >
         <div class="mt-4 rounded-xl overflow-hidden">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3761.6569340424862!2d-99.18579071760176!3d19.470352637795333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f884745cec7b%3A0xcf2b0423e37d6268!2sSal%C3%B3n%20de%20Asambleas%20de%20los%20testigos%20de%20Jehov%C3%A1!5e0!3m2!1ses-419!2smx!4v1768035229716!5m2!1ses-419!2smx"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.2011243000393!2d-99.17317372395729!3d19.186415882041047!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85ce0799ad3efcc3%3A0x9cddf1c2ff6f85be!2sCam.%20Real%20al%20Oyameyo%2080%2C%20Tlalpan%2C%2014713%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1ses-419!2smx!4v1768533612268!5m2!1ses-419!2smx"
             class="w-full h-72 border-0"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
@@ -376,7 +477,7 @@ h3 {
         </div>
 
         <a
-          href="https://maps.app.goo.gl/CwWVMxvs1t3VePBp7"
+          href="https://maps.app.goo.gl/YvgEraCZBx7TPQ6K7"
           target="_blank"
           class="inline-block mt-4 text-gold underline text-sm"
         >
@@ -387,18 +488,29 @@ h3 {
     </div>
   </div>
 </section>
+</section>
 
+<section
+  id="vestimenta"
+  class="relative min-h-screen flex items-center justify-center text-center bg-cover bg-center px-6"
+  style="background-image: url('media/images/pareja2.jpeg')"
+>
+  <div class="absolute inset-0 bg-black/70"></div>
+
+  <div class="relative z-10 max-w-5xl w-full text-center">
 
       <!-- Vestimenta -->
-      <section
-  id="vestimenta"
-  class="relative min-h-screen bg-black flex items-center justify-center px-6 py-20"
->
-  <div class="max-w-5xl w-full text-center">
+      <section id="vestimenta" class="relative min-h-screen bg-cover flex items-center justify-center px-6 py-20">
+        <div class="max-w-5xl w-full text-center">
 
-    <h2 class="text-4xl sm:text-5xl text-gold mb-12 hidden-anim observe">
-      Código de vestimenta
-    </h2>
+          <h2 class="text-4xl sm:text-5xl text-gold mb-12 hidden-anim observe">
+            Código de vestimenta
+          </h2>
+          <h3 class="mb-6 text-lg text-gray-300 hidden-anim observe">
+            Queremos que luzcan sus mejores atuendos, pero por favor, no usen colores blancos, negro, dorado y rojo en su vestimenta. Muchas gracias
+            <br><br>Ademas, como recordatorio, la boda sera en un jardin, asi que recomendamos llevar zapatos para poder andar en pasto, asi como de repelente.
+            No olviden llevar un abrigo, generalmente por la zona hace frio
+          </h3>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
 
@@ -414,10 +526,11 @@ h3 {
 
     <p class="text-gray-300 mb-4">
       Vestido largo o midi, colores sobrios o pasteles.
+      <br>Ejemplos
     </p>
 
     <div class="flex justify-center gap-3 mt-4">
-      <span class="w-6 h-6 rounded-full bg-rose-400"></span>
+      <span class="w-6 h-6 rounded-full bg-rose-300"></span>
       <span class="w-6 h-6 rounded-full bg-emerald-300"></span>
       <span class="w-6 h-6 rounded-full bg-slate-400"></span>
     </div>
@@ -448,10 +561,11 @@ h3 {
 
     <p class="text-gray-300 mb-4">
       Traje formal o saco y pantalón de vestir.
+      <br>Ejemplos
     </p>
 
     <div class="flex justify-center gap-3 mt-4">
-      <span class="w-6 h-6 rounded-full bg-slate-800"></span>
+      <span class="w-6 h-6 rounded-full bg-blue-900"></span>
       <span class="w-6 h-6 rounded-full bg-gray-600"></span>
       <span class="w-6 h-6 rounded-full bg-stone-500"></span>
     </div>
@@ -471,10 +585,10 @@ h3 {
 </section>
 <div
   id="modal-damas"
-  class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center
+  class="fixed inset-0 bg-cover backdrop-blur-sm z-50 flex items-center justify-center
          opacity-0 pointer-events-none transition"
 >
-  <div class="bg-black border border-white/10 rounded-2xl max-w-3xl w-full mx-6 p-6 relative scale-95 transition">
+  <div class="bg-cover border border-white/10 rounded-2xl max-w-3xl w-full mx-6 p-6 relative scale-95 transition">
 
     <!-- Cerrar -->
     <button
@@ -496,10 +610,10 @@ h3 {
 
 <div
   id="modal-caballeros"
-  class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center
+  class="fixed inset-0 bg-cover backdrop-blur-sm z-50 flex items-center justify-center
          opacity-0 pointer-events-none transition"
 >
-  <div class="bg-black border border-white/10 rounded-2xl max-w-3xl w-full mx-6 p-6 relative scale-95 transition">
+  <div class="bg-cover border border-white/10 rounded-2xl max-w-3xl w-full mx-6 p-6 relative scale-95 transition">
 
     <button
       class="absolute top-4 right-4 text-white text-xl"
@@ -517,87 +631,223 @@ h3 {
     </div>
   </div>
 </div>
+</section>
+</section>
+
+<section
+  id="itinerario"
+  class="relative min-h-screen flex items-center justify-center text-center bg-cover bg-center px-6"
+  style="background-image: url('media/images/pareja5.jpeg')"
+>
+
+  <div class="absolute inset-0 bg-black/70"></div>
+
+  <div class="relative z-10 max-w-5xl w-full text-center">
 
       <!-- Itinerario -->
-<section id="itinerario" class="relative min-h-screen bg-black px-6 py-24">
+<section id="itinerario" class="relative min-h-screen bg-cover px-6 py-24">
   <div class="max-w-4xl mx-auto text-center">
 
     <h2 class="text-4xl sm:text-5xl text-gold mb-16 hidden-anim observe">
       Itinerario
     </h2>
+    <p>Seleccione cada evento</p>
+    <br><br>
 
     <div class="relative max-w-xl mx-auto">
 
       <!-- Línea -->
-      <div class="timeline-line absolute left-4 top-0 bottom-0 w-px bg-gold/20"></div>
+      <div class="absolute left-4 top-0 bottom-0 w-px bg-gold/20"></div>
       <div
-          id="timeline-progress"
-         class="absolute left-4 top-0 w-px bg-gold transition-all duration-700"
-         style="height: 0%">
+        id="timeline-progress"
+        class="absolute left-4 top-0 w-px bg-gold transition-all duration-700"
+        style="height: 0%">
       </div>
 
-      <!-- ITEM -->
-      <div class="relative pl-12 mb-12 observe hidden-anim">
-        <div class="timeline-dot absolute left-1.5 top-1 w-3 h-3 bg-gold rounded-full"></div>
+      <!-- Recepción -->
+<div class="relative pl-16 mb-12 observe hidden-anim">
 
-        <button class="w-full text-left itinerary-btn">
-          <h3 class="text-xl text-white">Ceremonia</h3>
-          <p class="text-sm text-gold">13:00 hrs</p>
-        </button>
+  <!-- Icono = punto -->
+  <img
+    src="media/images/icons/arch.png"
+    alt="Recepción"
+    class="absolute left-5 top-2 w-9 h-9 icon-anim"
+  >
 
-        <div class="itinerary-content mt-4 text-gray-300 hidden">
-          <p>Lugar por confirmar</p>
-        </div>
-      </div>
-      <div class="relative pl-12 mb-12 observe hidden-anim">
-        <div class="timeline-dot absolute left-1.5 top-1 w-3 h-3 bg-gold rounded-full"></div>
+  <button class="w-full text-left itinerary-btn">
+    <h3 class="text-xl text-white">
+      Recepción de los invitados y bienvenida
+    </h3>
+    <p class="text-sm text-gold">14:00 hrs</p>
+  </button>
 
-        <button class="w-full text-left itinerary-btn">
-          <h3 class="text-xl text-white">Comida</h3>
-          <p class="text-sm text-gold">15:00 hrs</p>
-        </button>
+  <div class="itinerary-content mt-4 text-gray-300 hidden">
+    <p>Les esperamos para darles la bienvenida y compartir este momento especial.</p>
+  </div>
 
-        <div class="itinerary-content mt-4 text-gray-300 hidden">
-          <p>Queremos compartir una rica comida con nuestros invitados</p>
-        </div>
-      </div>
-      <div class="relative pl-12 mb-12 observe hidden-anim">
-        <div class="timeline-dot absolute left-1.5 top-1 w-3 h-3 bg-gold rounded-full"></div>
+</div>
 
-        <button class="w-full text-left itinerary-btn">
-          <h3 class="text-xl text-white">Baile</h3>
-          <p class="text-sm text-gold">17:00 hrs</p>
-        </button>
 
-        <div class="itinerary-content mt-4 text-gray-300 hidden">
-          <p>Saca tus mejores pasos!</p>
-        </div>
-      </div>
+      <!-- Discurso -->
+<div class="relative pl-16 mb-12 observe hidden-anim">
+
+  <!-- Icono = punto -->
+  <img
+    src="media/images/icons/bride.png"
+    alt="Recepción"
+    class="absolute left-5 top-2 w-9 h-9 icon-anim"
+  >
+
+  <button class="w-full text-left itinerary-btn">
+    <h3 class="text-xl text-white">
+      Discurso
+    </h3>
+    <p class="text-sm text-gold">14:30 hrs</p>
+  </button>
+
+  <div class="itinerary-content mt-4 text-gray-300 hidden">
+    <p>Discurso bíblico dirigido a los novios.</p>
+  </div>
+
+</div>
+
+      <!-- Fotos -->
+<div class="relative pl-16 mb-12 observe hidden-anim">
+
+  <!-- Icono = punto -->
+  <img
+    src="media/images/icons/camera-flash.png"
+    alt="Recepción"
+    class="absolute left-5 top-2 w-9 h-9 icon-anim"
+  >
+
+  <button class="w-full text-left itinerary-btn">
+    <h3 class="text-xl text-white">
+      Fotos
+    </h3>
+    <p class="text-sm text-gold">15:30 hrs</p>
+  </button>
+
+  <div class="itinerary-content mt-4 text-gray-300 hidden">
+    <p>Momento para capturar recuerdos juntos.</p>
+  </div>
+
+</div>
+
+
+      <!-- Comida -->
+<div class="relative pl-16 mb-12 observe hidden-anim">
+
+  <!-- Icono = punto -->
+  <img
+    src="media/images/icons/romantic-dinner.png"
+    alt="Recepción"
+    class="absolute left-5 top-2 w-9 h-9 icon-anim"
+  >
+
+  <button class="w-full text-left itinerary-btn">
+    <h3 class="text-xl text-white">
+      Comida
+    </h3>
+    <p class="text-sm text-gold">16:45 hrs</p>
+  </button>
+
+  <div class="itinerary-content mt-4 text-gray-300 hidden">
+    <p>Compartiremos los alimentos en un ambiente agradable.</p>
+  </div>
+
+</div>
+
+
+      <!-- Juegos -->
+<div class="relative pl-16 mb-12 observe hidden-anim">
+
+  <!-- Icono = punto -->
+  <img
+    src="media/images/icons/people.png"
+    alt="Recepción"
+    class="absolute left-5 top-2 w-9 h-9 icon-anim"
+  >
+
+  <button class="w-full text-left itinerary-btn">
+    <h3 class="text-xl text-white">
+      Juegos
+    </h3>
+    <p class="text-sm text-gold">18:30 hrs</p>
+  </button>
+
+  <div class="itinerary-content mt-4 text-gray-300 hidden">
+    <p>Nos divertiremos un rato junto con nuestros invitados.</p>
+  </div>
+
+</div>
+
+
+      <!-- Baile -->
+<div class="relative pl-16 mb-12 observe hidden-anim">
+
+  <!-- Icono = punto -->
+  <img
+    src="media/images/icons/dance (1).png"
+    alt="Recepción"
+    class="absolute left-5 top-2 w-9 h-9 icon-anim"
+  >
+
+  <button class="w-full text-left itinerary-btn">
+    <h3 class="text-xl text-white">
+      Baile
+    </h3>
+    <p class="text-sm text-gold">19:30 hrs</p>
+  </button>
+
+  <div class="itinerary-content mt-4 text-gray-300 hidden">
+    <p>¡Saquen sus mejores pasos!</p>
+  </div>
+
+</div>
+
+
+      <!-- Fin -->
+<div class="relative pl-16 mb-12 observe hidden-anim">
+
+  <!-- Icono = punto -->
+  <img
+    src="media/images/icons/just-married.png"
+    alt="Recepción"
+    class="absolute left-5 top-2 w-9 h-9 icon-anim"
+  >
+
+  <button class="w-full text-left itinerary-btn">
+    <h3 class="text-xl text-white">
+      Fin del evento
+    </h3>
+    <p class="text-sm text-gold">22:00 hrs</p>
+  </button>
+
+  <div class="itinerary-content mt-4 text-gray-300 hidden">
+    <p>Agradecemos su compañía en este día tan especial.</p>
+  </div>
+
+</div>
+
 
     </div>
   </div>
-  <button
-  class="scroll-btn absolute bottom-6 left-1/2 -translate-x-1/2 z-30
-         text-center cursor-pointer bg-transparent border-none"
-  data-scroll="mesa-regalos"
->
-  <p class="text-sm uppercase tracking-widest text-gold mb-2">
-    Desliza para ver más
-  </p>
-
-  <div class="w-5 h-9 border-2 border-gold rounded-full mx-auto flex justify-center">
-    <span class="w-1 h-2 bg-gold rounded-full mt-2 animate-scroll"></span>
-  </div>
-</button>
 </section>
+</section>
+
 
 </div>
 <!-- Mesa de Regalos -->
 <section
   id="mesa-regalos"
-  class="relative min-h-screen bg-black flex items-center justify-center px-6 py-20"
+  class="relative min-h-screen flex items-center justify-center text-center bg-cover bg-center px-6"
+  style="background-image: url('media/images/pareja6.jpeg')"
 >
-  <div class="max-w-5xl w-full text-center">
+
+  <div class="absolute inset-0 bg-black/70"></div>
+
+  <div class="relative z-10 max-w-5xl w-full text-center">
 
     <h2 class="text-4xl sm:text-5xl text-gold mb-6 hidden-anim observe">
       Mesa de regalos
@@ -608,79 +858,36 @@ h3 {
       Si desean obsequiarnos algo más, aquí les compartimos algunas opciones.
     </p>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 place-items-center">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-10 place-items-center">
 
-      <!-- AMAZON -->
-      <div
-        class="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur
-               w-full max-w-xs hidden-anim observe"
-      >
-        <h3 class="text-xl text-gold mb-4">Amazon</h3>
+  <!-- EFECTIVO / TRANSFERENCIA -->
+  <div
+    class="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur
+           w-full max-w-xs hidden-anim observe"
+  >
+    <h3 class="text-xl text-gold mb-4">Regalo en efectivo</h3>
 
-        <p class="text-gray-400 mb-6 text-sm">
-          Lista de regalos en línea
-        </p>
+    <p class="text-gray-400 mb-6 text-sm">
+      La mejor forma de apoyarnos seria con un regalo economico
+    </p>
 
-        <a
-          href="https://www.amazon.com.mx/"
-          target="_blank"
-          class="inline-block text-sm uppercase tracking-widest text-gold
-                 border border-gold px-6 py-2 rounded-full
-                 hover:bg-gold hover:text-black transition"
-        >
-          Ver lista
-        </a>
-      </div>
-
-      <!-- LIVERPOOL -->
-      <div
-        class="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur
-               w-full max-w-xs hidden-anim observe"
-      >
-        <h3 class="text-xl text-gold mb-4">Liverpool</h3>
-
-        <p class="text-gray-400 mb-6 text-sm">
-          Mesa de regalos
-        </p>
-
-        <a
-          href="https://www.liverpool.com.mx/"
-          target="_blank"
-          class="inline-block text-sm uppercase tracking-widest text-gold
-                 border border-gold px-6 py-2 rounded-full
-                 hover:bg-gold hover:text-black transition"
-        >
-          Ver mesa
-        </a>
-      </div>
-
-      <!-- EFECTIVO / TRANSFERENCIA -->
-      <div
-        class="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur
-               w-full max-w-xs hidden-anim observe"
-      >
-        <h3 class="text-xl text-gold mb-4">Regalo en efectivo</h3>
-
-        <p class="text-gray-400 mb-6 text-sm">
-          Lluvia de sobres o transferencia
-        </p>
-
-        <button
-  class="text-sm uppercase tracking-widest text-gold
-         border border-gold px-6 py-2 rounded-full
-         hover:bg-gold hover:text-black transition"
-  data-modal="modal-regalo"
->
-  Ver detalles
-</button>
-<!-- Modal Mesa de Regalos -->
+    <button
+      class="text-sm uppercase tracking-widest text-gold
+             border border-gold px-6 py-2 rounded-full
+             hover:bg-gold hover:text-black transition"
+      data-modal="modal-regalo"
+    >
+      Ver detalles
+    </button>
+  </div>
+  <!-- Modal Mesa de Regalos -->
 <div
   id="modal-regalo"
   class="fixed inset-0 bg-black/80 flex items-center justify-center
          opacity-0 pointer-events-none transition duration-500 z-50"
 >
   <div
-    class="bg-black border border-gold rounded-2xl p-8 max-w-md w-full mx-4
+    class="bg-cover border border-gold rounded-2xl p-8 max-w-md w-full mx-4
            transform scale-95 transition duration-500"
   >
 
@@ -694,10 +901,9 @@ h3 {
     </p>
 
     <div class="text-gray-200 text-sm space-y-2">
-      <p><span class="text-gold">Banco:</span> XXXXX</p>
-      <p><span class="text-gold">Cuenta:</span> XXXX XXXX XXXX XXXX</p>
-      <p><span class="text-gold">CLABE:</span> XXX XXX XXX XXX XXX XXX</p>
-      <p><span class="text-gold">Titular:</span> Nombre del titular</p>
+      <p><span class="text-gold">Banco:</span>Mercado Pago W</p>
+      <p><span class="text-gold">CLABE:</span>722969010212650495</p>
+      <p><span class="text-gold">Titular:</span>Ángel Josué López</p>
     </div>
 
     <button
@@ -712,9 +918,31 @@ h3 {
   </div>
 </div>
 
-      </div>
 
-    </div>
+  <!-- AMAZON -->
+  <div
+    class="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur
+           w-full max-w-xs hidden-anim observe"
+  >
+    <h3 class="text-xl text-gold mb-4">Amazon</h3>
+
+    <p class="text-gray-400 mb-6 text-sm">
+      Lista de regalos en línea
+    </p>
+
+    <a
+      href="https://www.amazon.com.mx/wedding/guest-view/28XQJDLEKFAZ6"
+      target="_blank"
+      class="inline-block text-sm uppercase tracking-widest text-gold
+             border border-gold px-6 py-2 rounded-full
+             hover:bg-gold hover:text-black transition"
+    >
+      Ver lista
+    </a>
+  </div>
+
+</div>
+
   </div>
   <button
   class="scroll-btn absolute bottom-6 left-1/2 -translate-x-1/2 z-30
@@ -729,40 +957,48 @@ h3 {
 
 <section
   id="rsvp"
-  class="relative min-h-screen bg-black flex items-center justify-center px-6 py-20"
+  class="relative min-h-screen flex justify-center bg-cover bg-center px-6"
+  style="background-image: url('media/images/pareja7.jpeg')"
 >
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-black/70"></div>
 
-  <div class="max-w-3xl w-full text-center hidden-anim observe">
+  <!-- Contenido -->
+  <div
+    class="relative z-10 w-full flex justify-center
+           pt-24 sm:pt-32 md:pt-40"
+  >
+    <div class="max-w-3xl text-center hidden-anim observe">
+      <h2 class="text-4xl sm:text-5xl text-gold mb-6">
+        Confirmación de asistencia
+      </h2>
 
-    <h2 class="text-4xl sm:text-5xl text-gold mb-6">
-      Confirmación de asistencia
-    </h2>
+      <p class="text-gray-300 mb-10">
+        Para nosotros es muy importante saber si nos acompañarás
+        en este día tan especial.
+      </p>
 
-    <p class="text-gray-300 mb-10">
-      Para nosotros es muy importante saber si nos acompañarás
-      en este día tan especial.
-    </p>
-
-    <button
-      class="text-sm uppercase tracking-widest text-gold
-             border border-gold px-8 py-3 rounded-full
-             hover:bg-gold hover:text-black transition"
-      data-modal="modal-rsvp"
-    >
-      Confirmar asistencia
-    </button>
-
+      <button
+        class="text-sm uppercase tracking-widest text-gold
+               border border-gold px-8 py-3 rounded-full
+               hover:bg-gold hover:text-black transition"
+        data-modal="modal-rsvp"
+      >
+        Confirmar asistencia
+      </button>
+    </div>
   </div>
 </section>
+
 <!-- Modal RSVP -->
 <div
   id="modal-rsvp"
   class="fixed inset-0 bg-black/80 flex items-center justify-center
-         opacity-0 pointer-events-none transition duration-500 z-50"
+opacity-0 pointer-events-none transition duration-500 z-50"
 >
 
   <div
-    class="bg-black border border-gold rounded-2xl p-8 max-w-md w-full mx-4
+    class="bg-cover border border-gold rounded-2xl p-8 max-w-md w-full mx-4
            transform scale-95 transition duration-500 text-center"
   >
 
@@ -807,10 +1043,22 @@ h3 {
 
 <section
   id="indice"
-  class="relative bg-black flex items-center justify-center px-6 py-20"
+  class="relative min-h-screen bg-cover
+         bg-[50%_20%]
+         md:bg-[50%_30%]
+         flex items-center justify-center
+         px-6 py-20"
+  style="background-image: url('media/images/pareja8.jpeg');"
 >
-  <div class="max-w-3xl w-full text-center">
 
+
+  <div class="absolute inset-0 bg-black/70"></div>
+  
+  <div
+    class="relative z-10 w-full flex justify-center
+           pt-24 sm:pt-32 md:pt-40"
+  >
+  <div class="max-w-3xl w-full text-center">
     <h2 class="text-3xl sm:text-4xl text-gold mb-8">
       Navegación
     </h2>
@@ -836,6 +1084,9 @@ h3 {
       <button data-scroll="#itinerario" class="nav-btn text-sm uppercase tracking-widest text-gold
          border border-gold px-6 py-3 rounded-full
          hover:bg-gold hover:text-black transition">Itinerario</button>
+      <button data-scroll="#mesa-regalos" class="nav-btn text-sm uppercase tracking-widest text-gold
+         border border-gold px-6 py-3 rounded-full
+         hover:bg-gold hover:text-black transition">Mesa de Regalos</button>
       <button data-scroll="#rsvp" class="nav-btn text-sm uppercase tracking-widest text-gold
          border border-gold px-6 py-3 rounded-full
          hover:bg-gold hover:text-black transition">Confirmación</button>
