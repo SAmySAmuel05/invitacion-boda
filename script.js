@@ -19,29 +19,42 @@ const musicToggle = document.getElementById("music-toggle");
 const musicIcon = document.getElementById("music-icon");
 
 
+let isPlaying = false;
+
+/* ▶️ Iniciar música (solo una vez, iOS safe) */
 startBtn.addEventListener("click", () => {
-  music.play();
+  music.volume = 0.4;
 
+  music.play().then(() => {
+    isPlaying = true;
+    musicIcon.src = "media/images/icons/boton-de-pausa.png";
+  });
+
+/* ⏯️ Botón play / pause */
 musicToggle.addEventListener("click", (e) => {
-  e.stopPropagation(); // evita conflictos con otros clicks
+  e.stopPropagation();
 
-if (music.paused) {
-  music.play();
-  musicIcon.src = "media/images/icons/boton-de-pausa.png";
-} else {
-  fadeOut(music);
-  musicIcon.src = "media/images/icons/jugar-buttton.png";
-}
+  if (isPlaying) {
+    fadeOut(music);
+    isPlaying = false;
+    musicIcon.src = "media/images/icons/jugar-buttton.png";
+  } else {
+    music.play().then(() => {
+      isPlaying = true;
+      musicIcon.src = "media/images/icons/boton-de-pausa.png";
+    });
+  }
 });
 
+/* 🎵 Fade elegante */
 function fadeOut(audio) {
   const fade = setInterval(() => {
     if (audio.volume > 0.05) {
       audio.volume -= 0.05;
     } else {
-      audio.pause();
-      audio.volume = 0.4;
       clearInterval(fade);
+      audio.pause();
+      audio.volume = 0.4; // volumen base al volver
     }
   }, 50);
 }
